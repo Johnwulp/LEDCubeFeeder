@@ -6,6 +6,7 @@ using System.Text;
 using System.Timers;
 using OpenHardwareMonitor.Hardware;
 using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace LEDCubeFeeder
 {
@@ -45,6 +46,11 @@ namespace LEDCubeFeeder
                         foreach (IHardware subHardware in hardwareItem.SubHardware)
                             subHardware.Update();
 
+                        foreach(ISensor sensor in hardwareItem.Sensors)
+                        {
+                            Logger.Debug($"Found sensor name: '{sensor.Name}' from type '{sensor.SensorType}' with value: {sensor.Value}");
+                        }
+
                         var _temp = hardwareItem.Sensors.Where(s => (s.SensorType == SensorType.Temperature) && s.Name.Equals("CPU Package")).FirstOrDefault();
                         string temp = String.Format("{0:0}", _temp.Value);
                         Logger.Debug($"{_temp.Name} Temp = {temp}");
@@ -68,14 +74,21 @@ namespace LEDCubeFeeder
                         }
                         catch (Exception ex)
                         {
-                            Logger.Error(ex);
+                            Logger.Error(ex, "Got exception during upd sending");  
                         }
+                    }
+                    else
+                    {
+                        Logger.Error("No HardwareType.CPU found!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
+                var st = new StackTrace(ex, true);
+                var frame = st.GetFrame(0);
+                var line = frame.GetFileLineNumber();
+                Logger.Error(ex, $"Got exception from thisComputer.Hardware on line {line}");
             }
         }
         protected override void OnStop()
