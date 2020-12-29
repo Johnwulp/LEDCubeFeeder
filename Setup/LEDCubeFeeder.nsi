@@ -7,7 +7,7 @@
 !define VERSIONBUILD 0
 !define MUI_ICON "src\led.ico"
 
-!define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}.2"
+!define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}.3"
 
 !include "nsDialogs.nsh"
 !include "LogicLib.nsh"
