@@ -6,12 +6,16 @@ Do not edit manually!
 -->
 <Dialog Name="con" Title="LEDCubeFeeder" Subtitle="Settings">
   <GroupBox Name="GroupBox2" Location="12, 12" Size="426, 204" Text="LEDCubeFeeder" TabIndex="0">
-    <Label Name="Label3" Location="221, 74" Text="in miliseconds" TabIndex="0" />
-    <Label Name="Label2" Location="16, 74" Size="91, 16" Text="Update interval" TabIndex="1" />
-    <Number Name="updateinterval" Location="115, 71" Text="10000" TabIndex="2" />
-    <Number Name="port" Location="115, 45" Text="1234" TabIndex="3" />
-    <TextBox Name="ip" Location="115, 19" Size="305, 20" TabIndex="4" />
-    <Label Name="Label1" Location="16, 22" Size="63, 16" Text="IP Address" TabIndex="5" />
-    <Label Name="Label5" Location="16, 48" Size="93, 17" Text="Port" TabIndex="6" />
+    <Label Name="Label6" Location="16, 126" Size="118, 17" Text="CPU sensor exclusion" TabIndex="0" />
+    <TextBox Name="cpuexclusion" Location="140, 123" Text="CPU Total" TabIndex="1" />
+    <Label Name="Label4" Location="16, 100" Size="93, 17" Text="Temp sensor" TabIndex="2" />
+    <TextBox Name="tempsensor" Location="140, 97" Text="CPU Package" TabIndex="3" />
+    <Label Name="Label3" Location="246, 74" Text="in miliseconds" TabIndex="4" />
+    <Label Name="Label2" Location="16, 74" Size="91, 16" Text="Update interval" TabIndex="5" />
+    <Number Name="updateinterval" Location="140, 71" Text="10000" TabIndex="6" />
+    <Number Name="port" Location="140, 45" Text="1234" TabIndex="7" />
+    <TextBox Name="ip" Location="140, 19" Size="221, 20" TabIndex="8" />
+    <Label Name="Label1" Location="16, 22" Size="63, 16" Text="IP Address" TabIndex="9" />
+    <Label Name="Label5" Location="16, 48" Size="93, 17" Text="Port" TabIndex="10" />
   </GroupBox>
 </Dialog>

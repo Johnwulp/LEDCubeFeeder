@@ -58,5 +58,29 @@ namespace LEDCubeFeeder.Properties {
                 this["updateinterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CPU Package")]
+        public string sensor_temp {
+            get {
+                return ((string)(this["sensor_temp"]));
+            }
+            set {
+                this["sensor_temp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CPU Total")]
+        public string sensor_cpu_exclude {
+            get {
+                return ((string)(this["sensor_cpu_exclude"]));
+            }
+            set {
+                this["sensor_cpu_exclude"] = value;
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@
 !define VERSIONBUILD 0
 !define MUI_ICON "src\led.ico"
 
-!define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}.3"
+!define VERSION "${VERSIONMAJOR}.${VERSIONMINOR}.${VERSIONBUILD}.4"
 
 !include "nsDialogs.nsh"
 !include "LogicLib.nsh"
@@ -35,6 +35,8 @@ ShowInstDetails show
 Var ConIP
 Var ConPort
 Var ConUpdateInterval
+Var ConTempSensor
+Var ConCPUSensorExclusion
 Var emptyResponse
 
 !insertmacro MUI_PAGE_WELCOME
@@ -49,6 +51,8 @@ Function PgPageLeaveConnector
     ${NSD_GetText} $hCtl_con_ip $ConIP
     ${NSD_GetText} $hCtl_con_port $ConPort
     ${NSD_GetText} $hCtl_con_updateinterval $ConUpdateInterval
+    ${NSD_GetText} $hCtl_con_tempsensor $ConTempSensor
+    ${NSD_GetText} $hCtl_con_cpuexclusion $ConCPUSensorExclusion
 
     ${If} $ConIP == ""
         MessageBox MB_ICONEXCLAMATION "Please configure a IP"
@@ -60,6 +64,14 @@ Function PgPageLeaveConnector
     ${EndIf}
     ${If} $ConUpdateInterval == ""
         MessageBox MB_ICONEXCLAMATION "Please enter a interval"
+        Abort
+    ${EndIf}
+	${If} $ConTempSensor == ""
+        MessageBox MB_ICONEXCLAMATION "Please enter a sensorname"
+        Abort
+    ${EndIf}
+	${If} $ConCPUSensorExclusion == ""
+        MessageBox MB_ICONEXCLAMATION "Please enter a sensorname"
         Abort
     ${EndIf}
 FunctionEnd
@@ -76,6 +88,8 @@ Section "install"
     ${textreplace::ReplaceInFile} "$INSTDIR\LEDCubeFeeder.exe.config" "$INSTDIR\LEDCubeFeeder.exe.config" "ledcubeserver_value" "$ConIP" "/S=1 /C=1 /AO=1" $emptyResponse
     ${textreplace::ReplaceInFile} "$INSTDIR\LEDCubeFeeder.exe.config" "$INSTDIR\LEDCubeFeeder.exe.config" "ledcubeport_value" "$ConPort" "/S=1 /C=1 /AO=1" $emptyResponse
     ${textreplace::ReplaceInFile} "$INSTDIR\LEDCubeFeeder.exe.config" "$INSTDIR\LEDCubeFeeder.exe.config" "updateinterval_value" "$ConUpdateInterval" "/S=1 /C=1 /AO=1" $emptyResponse
+    ${textreplace::ReplaceInFile} "$INSTDIR\LEDCubeFeeder.exe.config" "$INSTDIR\LEDCubeFeeder.exe.config" "sensor_temp_value" "$ConTempSensor" "/S=1 /C=1 /AO=1" $emptyResponse
+    ${textreplace::ReplaceInFile} "$INSTDIR\LEDCubeFeeder.exe.config" "$INSTDIR\LEDCubeFeeder.exe.config" "sensor_cpu_exclude_value" "$ConCPUSensorExclusion" "/S=1 /C=1 /AO=1" $emptyResponse
 
     # Uninstall section
     writeUninstaller "$INSTDIR\uninstall.exe"

@@ -11,5 +11,11 @@
     <Setting Name="updateinterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10000</Value>
     </Setting>
+    <Setting Name="sensor_temp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CPU Package</Value>
+    </Setting>
+    <Setting Name="sensor_cpu_exclude" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CPU Total</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

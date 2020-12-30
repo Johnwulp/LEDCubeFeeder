@@ -24,6 +24,9 @@ namespace LEDCubeFeeder
         protected override void OnStart(string[] args)
         {
             Logger.Info("Starting...");
+            Logger.Debug($"server: {Properties.Settings.Default.ledcubeserver} port: {Properties.Settings.Default.ledcubeport} " +
+                $"interval: {Properties.Settings.Default.updateinterval} Temp sensor: {Properties.Settings.Default.sensor_temp} " +
+                $"CPU exclusion sensor: {Properties.Settings.Default.sensor_cpu_exclude}");
             Timer timer = new Timer
             {
                 Interval = Properties.Settings.Default.updateinterval
@@ -51,11 +54,11 @@ namespace LEDCubeFeeder
                             Logger.Debug($"Found sensor name: '{sensor.Name}' from type '{sensor.SensorType}' with value: {sensor.Value}");
                         }
 
-                        var _temp = hardwareItem.Sensors.Where(s => (s.SensorType == SensorType.Temperature) && s.Name.Equals("CPU Package")).FirstOrDefault();
+                        var _temp = hardwareItem.Sensors.Where(s => (s.SensorType == SensorType.Temperature) && s.Name.Equals(Properties.Settings.Default.sensor_temp)).FirstOrDefault();
                         string temp = String.Format("{0:0}", _temp.Value);
                         Logger.Debug($"{_temp.Name} Temp = {temp}");
 
-                        var _cpu = hardwareItem.Sensors.Where(s => (s.SensorType == SensorType.Load) & !s.Name.Equals("CPU Total")).ToList();
+                        var _cpu = hardwareItem.Sensors.Where(s => (s.SensorType == SensorType.Load) & !s.Name.Equals(Properties.Settings.Default.sensor_cpu_exclude)).ToList();
                         foreach (ISensor cpu in _cpu)
                             Logger.Debug($"name: {cpu.Name} value: {String.Format("{0:0}", cpu.Value)}");
 
